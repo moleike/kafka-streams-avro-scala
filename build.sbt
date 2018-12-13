@@ -34,7 +34,14 @@ lazy val allSettings = baseSettings ++ publishSettings
 
 lazy val root = project.in(file("."))
   .settings(allSettings)
-  .settings(noPublishSettings)
+  .settings(moduleName := "kafka-streams-avro-scala")
+  .settings(
+    libraryDependencies ++= Seq(
+      "org.apache.kafka" % "kafka-clients" % kafkaVersion,
+      "io.confluent" % "kafka-avro-serializer" % confluentAvroVersion,
+      "com.sksamuel.avro4s" %% "avro4s-core" % avro4sVersion
+    )
+  )
   .settings(
     initialCommands in console :=
       """
@@ -42,19 +49,6 @@ lazy val root = project.in(file("."))
         |import io.confluent.kafka.serializers._
         |import com.sksamuel.avro4s._
       """.stripMargin
-  )
-  .dependsOn(core)
-  .aggregate(core)
-
-lazy val core = project
-  .settings(allSettings)
-  .settings(
-    moduleName := "kafka-streams-avro-scala",
-    libraryDependencies ++= Seq(
-      "org.apache.kafka" % "kafka-clients" % kafkaVersion,
-      "io.confluent" % "kafka-avro-serializer" % confluentAvroVersion,
-      "com.sksamuel.avro4s" %% "avro4s-core" % avro4sVersion
-    )
   )
 
 lazy val publishSettings = Seq(
