@@ -18,6 +18,8 @@ val compilerOptions = Seq(
 val confluentAvroVersion = "5.0.0"
 val kafkaVersion = "2.0.0"
 val avro4sVersion = "2.0.3"
+val scalaCheckVersion = "1.13.5"
+val scalaTestVersion = "3.0.5"
 
 resolvers ++= Seq(
   "confluent-release" at "https://packages.confluent.io/maven/"
@@ -39,7 +41,9 @@ lazy val root = project.in(file("."))
     libraryDependencies ++= Seq(
       "org.apache.kafka" % "kafka-clients" % kafkaVersion,
       "io.confluent" % "kafka-avro-serializer" % confluentAvroVersion,
-      "com.sksamuel.avro4s" %% "avro4s-core" % avro4sVersion
+      "com.sksamuel.avro4s" %% "avro4s-core" % avro4sVersion,
+      "org.scalacheck" %% "scalacheck" % scalaCheckVersion % Test,
+      "org.scalatest" %% "scalatest" % scalaTestVersion % Test
     )
   )
   .settings(
