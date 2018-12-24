@@ -60,7 +60,7 @@ lazy val publishSettings = Seq(
   homepage := Some(url("https://github.com/moleike/kafka-streams-avro-scala")),
   licenses := Seq("Apache 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
   publishMavenStyle := true,
-  publishArtifact in Test := false,
+  publishArtifact in Test := true,
   pomIncludeRepository := { _ => false },
   publishTo := {
     val nexus = "https://oss.sonatype.org/"
