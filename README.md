@@ -21,7 +21,7 @@ import com.moleike.kafka.streams.avro.generic.Serdes._
 ```
 Then configure the Serdes:
 ```scala
-implicit val conf: Config = Map("schema.registry.url" -> "localhost:8081")
+implicit val conf: Config = Map("schema.registry.url" -> "http://localhost:8081")
 ```
 Use case classes with no boilerplate in your Kafka Streams application:
 ```scala
