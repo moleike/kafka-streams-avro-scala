@@ -12,8 +12,8 @@ trait MockSchemaRegistry {
   private val serdeConfig: Serdes.Config = Map(SCHEMA_REGISTRY_URL_CONFIG -> "fake")
 
   implicit def serializerMock[A: Encoder: Decoder: SchemaFor]: Serializer[A] =
-    new KafkaAvroSerializerS(new KafkaAvroSerializer(client), serdeConfig)
+    new KafkaAvroSerializerS(serdeConfig, new KafkaAvroSerializer(client))
 
   implicit def deserializerMock[A: Encoder: Decoder: SchemaFor]: Deserializer[A] =
-    new KafkaAvroDeserializerS(new KafkaAvroDeserializer(client), serdeConfig)
+    new KafkaAvroDeserializerS(serdeConfig, new KafkaAvroDeserializer(client))
 }

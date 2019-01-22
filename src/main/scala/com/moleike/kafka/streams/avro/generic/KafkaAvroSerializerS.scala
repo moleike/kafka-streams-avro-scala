@@ -6,9 +6,10 @@ import com.sksamuel.avro4s._
 import java.util.{ Map => JMap }
 import scala.collection.JavaConverters._
 
-private[generic] class KafkaAvroSerializerS[A: Encoder : Decoder : SchemaFor]
-  (val inner: KafkaAvroSerializer,
-   val config: Map[String, Any]) extends Serializer[A] {
+class KafkaAvroSerializerS[A: Encoder : Decoder : SchemaFor]
+  (val config: Map[String, Any],
+   val inner: KafkaAvroSerializer = new KafkaAvroSerializer()
+  ) extends Serializer[A] {
 
   inner.configure(config.asJava, false)
 

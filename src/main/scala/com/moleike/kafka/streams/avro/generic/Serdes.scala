@@ -1,7 +1,6 @@
 package com.moleike.kafka.streams.avro.generic
 
 import org.apache.kafka.common.serialization.{ Deserializer, Serde, Serdes => JSerdes, Serializer }
-import io.confluent.kafka.serializers.{ KafkaAvroSerializer, KafkaAvroDeserializer }
 
 import com.sksamuel.avro4s._
 
@@ -11,11 +10,11 @@ object Serdes {
 
   implicit def serializer[A: Encoder: Decoder: SchemaFor]
     (implicit config: Config): Serializer[A] =
-    new KafkaAvroSerializerS(new KafkaAvroSerializer(), config)
+    new KafkaAvroSerializerS(config)
 
   implicit def deserializer[A: Encoder: Decoder: SchemaFor]
     (implicit config: Config): Deserializer[A] =
-    new KafkaAvroDeserializerS(new KafkaAvroDeserializer(), config)
+    new KafkaAvroDeserializerS(config)
 
   implicit def serde[A: Encoder: Decoder: SchemaFor]
     (implicit serializer: Serializer[A], deserializer: Deserializer[A]): Serde[A] =
