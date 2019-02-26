@@ -59,6 +59,7 @@ lazy val publishSettings = Seq(
   useGpg := false,
   homepage := Some(url("https://github.com/moleike/kafka-streams-avro-scala")),
   licenses := Seq("Apache 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
   publishMavenStyle := true,
   publishArtifact in Test := true,
   pomIncludeRepository := { _ => false },
@@ -91,6 +92,3 @@ lazy val noPublishSettings = Seq(
   publishLocal := {},
   publishArtifact := false
 )
-
-credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
-
