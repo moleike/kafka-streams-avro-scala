@@ -10,7 +10,7 @@ This library provides marshalling of [Avro][avro] records into case classes with
 To use this library add the following line to your dependencies:
 
 ```sbt
-"io.github.moleike" %% "kafka-streams-avro-scala" % "0.2.0-SNAPSHOT"
+"io.github.moleike" %% "kafka-streams-avro-scala" % "0.2.5"
 ```
 
 ## Synopsis
