@@ -1,10 +1,11 @@
 package com.moleike.kafka.streams.avro.generic
 
-import org.apache.avro.generic.GenericRecord
+import org.apache.avro.generic.IndexedRecord
 import org.apache.kafka.common.serialization.Deserializer
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import com.sksamuel.avro4s._
 import java.util.{ Map => JMap }
+
 import scala.collection.JavaConverters._
 
 class KafkaAvroDeserializerS[A: Encoder : Decoder : SchemaFor]
@@ -20,7 +21,7 @@ class KafkaAvroDeserializerS[A: Encoder : Decoder : SchemaFor]
 
   override def deserialize(topic: String, bytes: Array[Byte]): A =
     if (bytes == null) null.asInstanceOf[A]
-    else recordFormat.from(inner.deserialize(topic, bytes).asInstanceOf[GenericRecord])
+    else recordFormat.from(inner.deserialize(topic, bytes).asInstanceOf[IndexedRecord])
 
   override def close(): Unit = inner.close()
 }
