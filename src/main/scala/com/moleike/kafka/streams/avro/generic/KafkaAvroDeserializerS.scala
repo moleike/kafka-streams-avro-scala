@@ -20,7 +20,8 @@ class KafkaAvroDeserializerS[A: Encoder : Decoder : SchemaFor]
   override def configure(configs: JMap[String, _], isKey: Boolean): Unit = ()
 
   override def deserialize(topic: String, bytes: Array[Byte]): A =
-    recordFormat.from(inner.deserialize(topic, bytes).asInstanceOf[IndexedRecord])
+    if (bytes == null) null.asInstanceOf[A]
+    else recordFormat.from(inner.deserialize(topic, bytes).asInstanceOf[IndexedRecord])
 
   override def close(): Unit = inner.close()
 }

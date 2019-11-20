@@ -18,7 +18,8 @@ class KafkaAvroSerializerS[A: Encoder : Decoder : SchemaFor]
   override def configure(configs: JMap[String, _], isKey: Boolean): Unit = ()
 
   override def serialize(topic: String, value: A): Array[Byte] =
-    inner.serialize(topic, recordFormat.to(value))
+    if (value == null) null
+    else inner.serialize(topic, recordFormat.to(value))
 
   override def close(): Unit = inner.close()
 }
