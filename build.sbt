@@ -15,9 +15,9 @@ val compilerOptions = Seq(
   "-language:higherKinds"
 )
 
-val confluentAvroVersion = "5.0.0"
-val kafkaVersion = "2.0.0"
-val avro4sVersion = "2.0.3"
+val confluentAvroVersion = "5.3.0"
+val kafkaVersion = "2.3.1"
+val avro4sVersion = "3.0.4"
 val scalaCheckVersion = "1.13.5"
 val scalaTestVersion = "3.0.5"
 
