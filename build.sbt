@@ -55,21 +55,17 @@ lazy val root = project.in(file("."))
       """.stripMargin
   )
 
+import xerial.sbt.Sonatype._
+
 lazy val publishSettings = Seq(
-  useGpg := false,
+  sonatypeProfileName := "io.github.moleike",
+  sonatypeProjectHosting := Some(GitHubHosting("moleike", "kafka-streams-avro-scala", "alexmorenocano@gmail.com")),
   homepage := Some(url("https://github.com/moleike/kafka-streams-avro-scala")),
   licenses := Seq("Apache 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
-  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
   publishMavenStyle := true,
   publishArtifact in Test := true,
   pomIncludeRepository := { _ => false },
-  publishTo := {
-    val nexus = "https://oss.sonatype.org/"
-    if (isSnapshot.value)
-      Some("snapshots" at nexus + "content/repositories/snapshots")
-    else
-      Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-  },
+  publishTo := sonatypePublishToBundle.value,
   scmInfo := Some(
     ScmInfo(
       url("https://github.com/moleike/kafka-streams-avro-scala"),
